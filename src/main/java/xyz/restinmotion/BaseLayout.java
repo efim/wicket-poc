@@ -3,6 +3,7 @@ package xyz.restinmotion;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class BaseLayout extends WebPage {
@@ -14,6 +15,8 @@ public class BaseLayout extends WebPage {
 
 	public BaseLayout(final PageParameters parameters) {
 		super(parameters);
+
+		this.add(new FeedbackPanel("feedback"));
 
 		this.add(headerPanel = new HeaderPanel("headerPanel"));
 		this.add(menuPanel = new NavigationPanel("navigationPanel"));

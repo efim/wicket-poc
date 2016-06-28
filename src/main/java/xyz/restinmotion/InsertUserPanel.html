@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel for creating new users</title>
+</head>
+<body>
+    <wicket:panel>
+        <span><h2>Add new user to contents</h2></span> <br>
+        <form wicket:id="new_user_form">
+            <fieldset id="personal_data">
+                <legend>Personal data:</legend>
+                <input wicket:id="first_name" type="text" size="30" /> <br>
+                <input wicket:id="last_name" type="text" size="30" /> <br>
+                <label>Sex:</label>
+                <select wicket:id="sex_selection"></select> <br>
+            </fieldset>
+            <fieldset id="medical_info">
+                <legend>Medical info:</legend>
+                <label>Allergies:</label> <br>
+                <span id="allergies_selection"></span> <br>
+                <label>In case of brain damage:</label> <br>
+                <span id="brain_damage_selection"></span> <br>
+            </fieldset>
+            <input type="submit" value="Submit
+            ">
+        </form>
+    </wicket:panel>
+</body>
+</html>
