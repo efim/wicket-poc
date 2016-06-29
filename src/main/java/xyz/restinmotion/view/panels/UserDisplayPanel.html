@@ -6,7 +6,15 @@
 </head>
 <body>
     <wicket:panel>
-        <h2>Users will be displayed here</h2>
+        <h2>List of all added users:</h2>
+        <table>
+            <tr style="border: 2px solid black;">
+                <th>Name</th><th>Last name</th><th>Sex</th><th>Known allergies</th><th>Termination preference</th>
+            </tr>
+            <tr wicket:id="user_table_rows" style="border: 1px solid black;">
+                <td wicket:id="user_data_row"  style="border: 1px solid grey;"></td>
+            </tr>
+        </table>
     </wicket:panel>
 </body>
 </html>
