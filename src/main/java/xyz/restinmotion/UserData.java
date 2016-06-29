@@ -1,12 +1,13 @@
 package xyz.restinmotion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by efim on 28.06.16.
  */
-public class UserData {
+public class UserData implements Serializable{
     private String firstName;
     private String lastName;
     private String sex;
