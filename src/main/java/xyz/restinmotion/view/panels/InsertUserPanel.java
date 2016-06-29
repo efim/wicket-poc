@@ -4,6 +4,7 @@ import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import xyz.restinmotion.data.Repository;
 import xyz.restinmotion.data.UserData;
 import xyz.restinmotion.view.pages.MainPage;
 
@@ -29,13 +30,8 @@ public class InsertUserPanel extends Panel {
                 userDataModel) {
             @Override
             protected void onSubmit() {
-                Session sesstion = this.getSession();
-                sesstion.info("form is submitted!");
-                sesstion.info("first name : " + userData.getFirstName());
-                sesstion.info("last name : " + userData.getLastName());
-                sesstion.info("sex : " + userData.getSex());
-                sesstion.info("allergies : " + userData.getAllergies().toString());
-                sesstion.info("brain damage preference : " + userData.getBrainDamagePreference().toString());
+                Repository.getRepository().addUserData(userData);
+                notifyUserDataFormSubmission();
                 setResponsePage(MainPage.class);
             }
         };
@@ -60,7 +56,22 @@ public class InsertUserPanel extends Panel {
         userDataForm.add(dsSexSeletion);
         userDataForm.add(rcBrainDamagePreference);
         userDataForm.add(cbmcAllergies);
+    }
 
+    private void notifyUserDataFormSubmissionDetails() {
+        Session session = this.getSession();
+        session.info("form is submitted!");
+        session.info("first name : " + userData.getFirstName());
+        session.info("last name : " + userData.getLastName());
+        session.info("sex : " + userData.getSex());
+        session.info("allergies : " + userData.getAllergies().toString());
+        session.info("brain damage preference : " + userData.getBrainDamagePreference().toString());
+    }
 
+    private void notifyUserDataFormSubmission() {
+        Session session = this.getSession();
+        session.info("New user with" +
+                " name : " + userData.getFirstName() + " " + userData.getLastName()
+                + "and id : " + userData.getUuid().toString() + " has been added.");
     }
 }

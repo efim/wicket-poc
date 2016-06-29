@@ -23,7 +23,7 @@ public class Repository {
         return new ArrayList<UserData>(users.values());
     }
 
-    public Repository getRepository() {
+    public static Repository getRepository() {
         return RepoHolder.INSTANCE;
     }
 
