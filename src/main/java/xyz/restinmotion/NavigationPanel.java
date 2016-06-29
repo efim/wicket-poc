@@ -12,7 +12,7 @@ public class NavigationPanel extends Panel {
         Link homePageLink = new Link("home_link") {
             @Override
             public void onClick() {
-                this.setResponsePage(BaseLayout.class);
+                this.setResponsePage(MainPage.class);
             }
         };
 

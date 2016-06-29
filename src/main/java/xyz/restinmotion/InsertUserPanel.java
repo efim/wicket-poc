@@ -22,6 +22,7 @@ public class InsertUserPanel extends Panel {
         super(id);
 
         final CompoundPropertyModel<UserData> userDataModel = new CompoundPropertyModel<>(userData);
+
         final Form<UserData> userDataForm = new Form<UserData>("new_user_form",
                 userDataModel) {
             @Override
@@ -33,12 +34,13 @@ public class InsertUserPanel extends Panel {
                 sesstion.info("sex : " + userData.getSex());
                 sesstion.info("allergies : " + userData.getAllergies().toString());
                 sesstion.info("brain damage preference : " + userData.getBrainDamagePreference().toString());
+                setResponsePage(MainPage.class);
             }
         };
 
-        final TextField<String> tFirstName = new TextField<>("first_name", userDataModel.<String>bind("firstName"));
+        final RequiredTextField<String> tFirstName = new RequiredTextField<>("first_name", userDataModel.<String>bind("firstName"));
 
-        final TextField<String> tLastName = new TextField<>("last_name", userDataModel.<String>bind("lastName"));
+        final RequiredTextField<String> tLastName = new RequiredTextField<>("last_name", userDataModel.<String>bind("lastName"));
 
         final DropDownChoice<String> dsSexSeletion = new DropDownChoice<>("sex_selection",
                 userDataModel.<String>bind("sex"), SEX_VALUES);
@@ -48,6 +50,7 @@ public class InsertUserPanel extends Panel {
 
         final RadioChoice<String> rcBrainDamagePreference = new RadioChoice<>("brain_damage_selection",
                 userDataModel.<String>bind("brainDamagePreference"), BRAIN_DAMAGE_PREFERENCE_VALUES);
+        rcBrainDamagePreference.setRequired(Boolean.TRUE);
 
         this.add(userDataForm);
         userDataForm.add(tFirstName);
