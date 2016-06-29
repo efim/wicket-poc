@@ -1,9 +1,7 @@
 package xyz.restinmotion;
 
 import org.apache.wicket.Session;
-import org.apache.wicket.markup.html.form.DropDownChoice;
-import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 
@@ -15,6 +13,9 @@ import java.util.List;
  */
 public class InsertUserPanel extends Panel {
     private static final List<String> SEX_VALUES = Arrays.asList(new String[] {"male", "female", "other"});
+    private static final List<String> ALLERGY_VALUES = Arrays.asList(new String[] {"Nuts", "Flowers", "Babies", "Rainbows"});
+    private static final List<String> BRAIN_DAMAGE_PREFERENCE_VALUES =
+            Arrays.asList(new String[] {"Keep alive", "Terminate", "Family decides"});
     private UserData userData = new UserData();
 
     public InsertUserPanel(String id) {
@@ -30,20 +31,30 @@ public class InsertUserPanel extends Panel {
                 sesstion.info("first name : " + userData.getFirstName());
                 sesstion.info("last name : " + userData.getLastName());
                 sesstion.info("sex : " + userData.getSex());
+                sesstion.info("allergies : " + userData.getAllergies().toString());
+                sesstion.info("brain damage preference : " + userData.getBrainDamagePreference().toString());
             }
         };
 
         final TextField<String> tFirstName = new TextField<>("first_name", userDataModel.<String>bind("firstName"));
 
-        final TextField<String> tLastName = new TextField<String>("last_name", userDataModel.<String>bind("lastName"));
+        final TextField<String> tLastName = new TextField<>("last_name", userDataModel.<String>bind("lastName"));
 
-        final DropDownChoice<String> dsSexSeletion = new DropDownChoice<String>("sex_selection",
+        final DropDownChoice<String> dsSexSeletion = new DropDownChoice<>("sex_selection",
                 userDataModel.<String>bind("sex"), SEX_VALUES);
+
+        final CheckBoxMultipleChoice<String> cbmcAllergies = new CheckBoxMultipleChoice<String>("allergies_selection",
+                userDataModel.<List<String>>bind("allergies"), ALLERGY_VALUES);
+
+        final RadioChoice<String> rcBrainDamagePreference = new RadioChoice<>("brain_damage_selection",
+                userDataModel.<String>bind("brainDamagePreference"), BRAIN_DAMAGE_PREFERENCE_VALUES);
 
         this.add(userDataForm);
         userDataForm.add(tFirstName);
         userDataForm.add(tLastName);
         userDataForm.add(dsSexSeletion);
+        userDataForm.add(rcBrainDamagePreference);
+        userDataForm.add(cbmcAllergies);
 
 
     }
