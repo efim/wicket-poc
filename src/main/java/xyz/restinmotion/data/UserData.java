@@ -1,13 +1,15 @@
-package xyz.restinmotion;
+package xyz.restinmotion.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by efim on 28.06.16.
  */
 public class UserData implements Serializable{
+    private UUID uuid = UUID.randomUUID();
     private String firstName;
     private String lastName;
     private String sex;
@@ -20,6 +22,10 @@ public class UserData implements Serializable{
         sex = "";
         brainDamagePreference = "";
         allergies = new ArrayList<String>();
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     public String getFirstName() {
