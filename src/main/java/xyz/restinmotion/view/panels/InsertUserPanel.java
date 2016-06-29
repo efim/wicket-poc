@@ -4,6 +4,7 @@ import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.validation.validator.StringValidator;
 import xyz.restinmotion.data.Repository;
 import xyz.restinmotion.data.UserData;
 import xyz.restinmotion.view.pages.MainPage;
@@ -37,8 +38,10 @@ public class InsertUserPanel extends Panel {
         };
 
         final RequiredTextField<String> tFirstName = new RequiredTextField<>("first_name", userDataModel.<String>bind("firstName"));
+        tFirstName.add(StringValidator.maximumLength(20));
 
         final RequiredTextField<String> tLastName = new RequiredTextField<>("last_name", userDataModel.<String>bind("lastName"));
+        tFirstName.add(StringValidator.maximumLength(20));
 
         final DropDownChoice<String> dsSexSeletion = new DropDownChoice<>("sex_selection",
                 userDataModel.<String>bind("sex"), SEX_VALUES);
