@@ -1,9 +1,11 @@
-package xyz.restinmotion;
+package xyz.restinmotion.view.panels;
 
 import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import xyz.restinmotion.UserData;
+import xyz.restinmotion.view.pages.MainPage;
 
 import java.util.Arrays;
 import java.util.List;

@@ -3,7 +3,7 @@ package xyz.restinmotion;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
-import sun.applet.Main;
+import xyz.restinmotion.view.pages.MainPage;
 
 /**
  * Simple test using the WicketTester

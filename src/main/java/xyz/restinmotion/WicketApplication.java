@@ -2,6 +2,7 @@ package xyz.restinmotion;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import xyz.restinmotion.view.pages.MainPage;
 
 /**
  * Application object for your web application.

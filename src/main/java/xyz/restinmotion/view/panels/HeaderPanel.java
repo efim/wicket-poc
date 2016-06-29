@@ -1,4 +1,4 @@
-package xyz.restinmotion;
+package xyz.restinmotion.view.panels;
 
 import org.apache.wicket.markup.html.panel.Panel;
 

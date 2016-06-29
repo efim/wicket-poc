@@ -1,7 +1,9 @@
-package xyz.restinmotion;
+package xyz.restinmotion.view.panels;
 
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
+import xyz.restinmotion.view.pages.MainPage;
+import xyz.restinmotion.view.pages.UserDisplayPage;
 
 /**
  * Created by efim on 28.06.16.
