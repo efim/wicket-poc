@@ -1,6 +1,7 @@
 package xyz.restinmotion.view.panels;
 
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.RepeatingView;
@@ -38,6 +39,9 @@ public class UserDisplayPanel extends Panel {
             }
         };
 
+        userDataView.setItemsPerPage(20);
+
         this.add(userDataView);
+        this.add(new PagingNavigator("user_data_paging_navigator", userDataView));
     }
 }
