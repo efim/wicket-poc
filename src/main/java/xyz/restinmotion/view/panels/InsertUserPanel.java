@@ -1,6 +1,9 @@
 package xyz.restinmotion.view.panels;
 
 import org.apache.wicket.Session;
+import org.apache.wicket.datetime.StyleDateConverter;
+import org.apache.wicket.datetime.markup.html.form.DateTextField;
+import org.apache.wicket.extensions.yui.calendar.DatePicker;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -10,6 +13,7 @@ import xyz.restinmotion.data.UserData;
 import xyz.restinmotion.view.pages.MainPage;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,8 +50,25 @@ public class InsertUserPanel extends Panel {
         final DropDownChoice<String> dsSexSeletion = new DropDownChoice<>("sex_selection",
                 userDataModel.<String>bind("sex"), SEX_VALUES);
 
+        final RequiredTextField<Double> tTemperature = new RequiredTextField<>("temperature",
+                userDataModel.<Double>bind("temperature"));
+
+        final DateTextField tBirthDate = new DateTextField("birth_date",
+                userDataModel.<Date>bind("birthDate"), new StyleDateConverter("S-", true));
+
         final CheckBoxMultipleChoice<String> cbmcAllergies = new CheckBoxMultipleChoice<String>("allergies_selection",
                 userDataModel.<List<String>>bind("allergies"), ALLERGY_VALUES);
+
+        final DatePicker birthDateDatePicker = new DatePicker() {
+            @Override
+            protected String getAdditionalJavaScript()
+            {
+                return "${calendar}.cfg.setProperty(\"navigator\",true,false); ${calendar}.render();";
+            }
+        };
+        birthDateDatePicker.setShowOnFieldClick(true);
+        birthDateDatePicker.setAutoHide(true);
+        tBirthDate.add(birthDateDatePicker);
 
         final RadioChoice<String> rcBrainDamagePreference = new RadioChoice<>("brain_damage_selection",
                 userDataModel.<String>bind("brainDamagePreference"), BRAIN_DAMAGE_PREFERENCE_VALUES);
@@ -59,6 +80,8 @@ public class InsertUserPanel extends Panel {
         userDataForm.add(dsSexSeletion);
         userDataForm.add(rcBrainDamagePreference);
         userDataForm.add(cbmcAllergies);
+        userDataForm.add(tBirthDate);
+        userDataForm.add(tTemperature);
     }
 
     private void notifyUserDataFormSubmissionDetails() {

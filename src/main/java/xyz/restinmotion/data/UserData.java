@@ -2,6 +2,7 @@ package xyz.restinmotion.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,6 +14,8 @@ public class UserData implements Serializable{
     private String firstName;
     private String lastName;
     private String sex;
+    private Date birthDate;
+    private Double temperature;
     private List<String> allergies;
     private String brainDamagePreference;
 
@@ -50,6 +53,22 @@ public class UserData implements Serializable{
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
     }
 
     public List<String> getAllergies() {

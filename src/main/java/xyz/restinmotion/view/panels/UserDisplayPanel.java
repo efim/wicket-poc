@@ -32,9 +32,10 @@ public class UserDisplayPanel extends Panel {
                 repeatingView.add(new Label(repeatingView.newChildId(), data.getFirstName()));
                 repeatingView.add(new Label(repeatingView.newChildId(), data.getLastName()));
                 repeatingView.add(new Label(repeatingView.newChildId(), data.getSex()));
+                repeatingView.add(new Label(repeatingView.newChildId(), data.getBirthDate().toString()));
+                repeatingView.add(new Label(repeatingView.newChildId(), data.getTemperature().toString()));
                 repeatingView.add(new Label(repeatingView.newChildId(), data.getAllergies().toString()));
                 repeatingView.add(new Label(repeatingView.newChildId(), data.getBrainDamagePreference()));
-
                 item.add(repeatingView);
             }
         };
