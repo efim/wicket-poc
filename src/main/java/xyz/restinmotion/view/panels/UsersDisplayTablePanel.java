@@ -15,9 +15,9 @@ import java.util.List;
 /**
  * Created by efim on 29.06.16.
  */
-public class UserDisplayPanel extends Panel {
+public class UsersDisplayTablePanel extends Panel {
 
-    public UserDisplayPanel(String id) {
+    public UsersDisplayTablePanel(String id) {
         super(id);
 
         List<UserData> userDataList = Repository.getRepository().getUserList();
