@@ -7,6 +7,9 @@ import org.apache.wicket.extensions.yui.calendar.DatePicker;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.validation.IValidatable;
+import org.apache.wicket.validation.IValidator;
+import org.apache.wicket.validation.ValidationError;
 import org.apache.wicket.validation.validator.StringValidator;
 import xyz.restinmotion.data.Repository;
 import xyz.restinmotion.data.UserData;
@@ -15,6 +18,7 @@ import xyz.restinmotion.view.pages.MainPage;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
 
 /**
  * Created by efim on 28.06.16.
@@ -52,9 +56,43 @@ public class InsertUserPanel extends Panel {
 
         final RequiredTextField<Double> tTemperature = new RequiredTextField<>("temperature",
                 userDataModel.<Double>bind("temperature"));
+        final IValidator<Double> temperatureValidator = new IValidator<Double>() {
+            @Override
+            public void validate(IValidatable<Double> validatable) {
+                Double submittedTemperature = validatable.getValue();
+                Double lowerBoundTemperature = 0.0;
+                Double higherBoundTemperature = 43.0;
+                if (submittedTemperature < lowerBoundTemperature
+                        || submittedTemperature > higherBoundTemperature) {
+
+                    ValidationError error = new ValidationError("Submitted temperature is incorrect. ");
+                    error.setVariable("lowerBound", lowerBoundTemperature.toString());
+                    error.setVariable("higherBound", higherBoundTemperature.toString());
+                    validatable.error(error);
+                }
+            }
+        };
+        tTemperature.add(temperatureValidator);
 
         final DateTextField tBirthDate = new DateTextField("birth_date",
-                userDataModel.<Date>bind("birthDate"), new StyleDateConverter("S-", true));
+                userDataModel.<Date>bind("birthDate"), new StyleDateConverter("M-", true));
+        final IValidator<Date> birthDateValidator = new IValidator<Date>() {
+            @Override
+            public void validate(IValidatable<Date> validatable) {
+                Date chosenBirthDate = validatable.getValue();
+                Calendar lowerBoundDate = Calendar.getInstance();
+                lowerBoundDate.add(Calendar.YEAR, -150);
+
+                if (chosenBirthDate.after(new Date())
+                        || chosenBirthDate.before(lowerBoundDate.getTime()) )
+                {
+                    ValidationError error = new ValidationError("Birth date is incorrect. ");
+                    error.setVariable("lowerBoundDate", lowerBoundDate.getTime().toString());
+                    validatable.error(error);
+                }
+            }
+        };
+        tBirthDate.add(birthDateValidator);
 
         final CheckBoxMultipleChoice<String> cbmcAllergies = new CheckBoxMultipleChoice<String>("allergies_selection",
                 userDataModel.<List<String>>bind("allergies"), ALLERGY_VALUES);
