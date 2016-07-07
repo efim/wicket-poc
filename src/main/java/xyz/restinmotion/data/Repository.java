@@ -19,6 +19,10 @@ public class Repository {
         users.put(record.getUuid(), record);
     }
 
+    public UserData getById(UUID userId) {
+        return users.get(userId);
+    }
+
     public List<UserData> getUserList() {
         return new ArrayList<UserData>(users.values());
     }
