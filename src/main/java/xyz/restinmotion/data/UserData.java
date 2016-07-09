@@ -10,7 +10,7 @@ import java.util.UUID;
  * Created by efim on 28.06.16.
  */
 public class UserData implements Serializable{
-    private UUID uuid = UUID.randomUUID();
+    private final UUID uuid = UUID.randomUUID();
     private String firstName;
     private String lastName;
     private String sex;
@@ -26,6 +26,18 @@ public class UserData implements Serializable{
         brainDamagePreference = "";
         allergies = new ArrayList<String>();
     }
+
+    public UserData(String firstName, String lastName, String sex, Date birthDate,
+                    Double temperature, List<String> allergies, String brainDamagePreference) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sex = sex;
+        this.birthDate = birthDate;
+        this.temperature = temperature;
+        this.allergies = allergies;
+        this.brainDamagePreference = brainDamagePreference;
+    }
+
 
     public UUID getUuid() {
         return uuid;

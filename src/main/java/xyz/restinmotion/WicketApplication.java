@@ -2,7 +2,13 @@ package xyz.restinmotion;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import xyz.restinmotion.data.Repository;
+import xyz.restinmotion.data.UserData;
 import xyz.restinmotion.view.pages.MainPage;
+
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Application object for your web application.
@@ -28,6 +34,13 @@ public class WicketApplication extends WebApplication
 	public void init()
 	{
 		super.init();
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.YEAR, -10);
+		Date reasonalbleBirthDate = calendar.getTime();
+
+		Repository.getRepository().addUserData(
+				new UserData("name1", "surname1", "non-enum =)", reasonalbleBirthDate, 36.6,
+						Arrays.asList(new String[] {"Babyes", "Also non-enum =)"}), "last non-enum =)"));
 
 		// add your configuration here
 	}
