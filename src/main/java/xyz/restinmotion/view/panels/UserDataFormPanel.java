@@ -72,7 +72,8 @@ public abstract class UserDataFormPanel extends Panel {
             @Override
             public List<String> getObject() {
                 return Repository.getRepository().getByLastName(userData.getLastName())
-                        .stream().map(userData -> userData.getFirstName() + " " + userData.getLastName())
+                        .stream().filter(relativeData -> relativeData.getUuid() != userData.getUuid())
+                        .map(userData -> userData.getFirstName() + " " + userData.getLastName())
                         .collect(Collectors.toList());
             }
         };
