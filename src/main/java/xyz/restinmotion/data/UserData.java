@@ -14,6 +14,7 @@ public class UserData implements Serializable{
     private String firstName;
     private String lastName;
     private String sex;
+    private String relative;
     private Date birthDate;
     private Double temperature;
     private List<String> allergies;
@@ -23,6 +24,7 @@ public class UserData implements Serializable{
         firstName = "";
         lastName = "";
         sex = "";
+        relative = "";
         brainDamagePreference = "";
         allergies = new ArrayList<String>();
     }
@@ -32,11 +34,13 @@ public class UserData implements Serializable{
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;
+        this.relative = "";
         this.birthDate = birthDate;
         this.temperature = temperature;
         this.allergies = allergies;
         this.brainDamagePreference = brainDamagePreference;
     }
+
 
 
     public UUID getUuid() {
@@ -66,6 +70,16 @@ public class UserData implements Serializable{
     public void setSex(String sex) {
         this.sex = sex;
     }
+
+
+    public String getRelative() {
+        return relative;
+    }
+
+    public void setRelative(String relative) {
+        this.relative = relative;
+    }
+
 
     public Date getBirthDate() {
         return birthDate;

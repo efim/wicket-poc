@@ -40,7 +40,12 @@ public class WicketApplication extends WebApplication
 
 		Repository.getRepository().addUserData(
 				new UserData("name1", "surname1", "non-enum =)", reasonalbleBirthDate, 36.6,
-						Arrays.asList(new String[] {"Babyes", "Also non-enum =)"}), "last non-enum =)"));
+						Arrays.asList(new String[] {"Babyes", "Also non-enum =)"}), "Terminate"));
+
+		Repository.getRepository().addUserData(
+				new UserData("hello", "world", "non-enum =)", reasonalbleBirthDate, 36.6,
+						Arrays.asList(new String[] {"Babyes", "Also non-enum =)"}), "Terminate"));
+
 
 		// add your configuration here
 	}

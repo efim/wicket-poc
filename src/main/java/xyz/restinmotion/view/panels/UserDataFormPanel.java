@@ -1,23 +1,29 @@
 package xyz.restinmotion.view.panels;
 
 import org.apache.wicket.Session;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.datetime.StyleDateConverter;
 import org.apache.wicket.datetime.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.IValidator;
 import org.apache.wicket.validation.ValidationError;
 import org.apache.wicket.validation.validator.StringValidator;
+import xyz.restinmotion.data.Repository;
 import xyz.restinmotion.data.UserData;
 
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by efim on 28.06.16.
@@ -56,10 +62,30 @@ public abstract class UserDataFormPanel extends Panel {
         tFirstName.add(StringValidator.maximumLength(20));
 
         final RequiredTextField<String> tLastName = new RequiredTextField<>("last_name", userDataModel.<String>bind("lastName"));
-        tFirstName.add(StringValidator.maximumLength(20));
+        tLastName.add(StringValidator.maximumLength(20));
 
         final DropDownChoice<String> dsSexSeletion = new DropDownChoice<>("sex_selection",
                 userDataModel.<String>bind("sex"), SEX_VALUES);
+
+
+        IModel<List<String>> relativesNames = new AbstractReadOnlyModel<List<String>>() {
+            @Override
+            public List<String> getObject() {
+                return Repository.getRepository().getByLastName(userData.getLastName())
+                        .stream().map(userData -> userData.getFirstName() + " " + userData.getLastName())
+                        .collect(Collectors.toList());
+            }
+        };
+        final DropDownChoice<String> dsRelativeSelection = new DropDownChoice<String>("relative_selection",
+                userDataModel.<String>bind("relative"), relativesNames);
+        dsRelativeSelection.setOutputMarkupId(true);
+
+        tLastName.add(new AjaxFormComponentUpdatingBehavior(" change ") {
+            @Override
+            protected void onUpdate(AjaxRequestTarget target) {
+                target.add(dsRelativeSelection);
+            }
+        });
 
         final RequiredTextField<Double> tTemperature = new RequiredTextField<>("temperature",
                 userDataModel.<Double>bind("temperature"));
@@ -123,6 +149,7 @@ public abstract class UserDataFormPanel extends Panel {
         userDataForm.add(tFirstName);
         userDataForm.add(tLastName);
         userDataForm.add(dsSexSeletion);
+        userDataForm.add(dsRelativeSelection);
         userDataForm.add(rcBrainDamagePreference);
         userDataForm.add(cbmcAllergies);
         userDataForm.add(tBirthDate);

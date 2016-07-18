@@ -25,8 +25,15 @@ public class UsersDisplayTablePanel extends Panel {
     public UsersDisplayTablePanel(String id) {
         super(id);
 
-        List<UserData> userDataList = Repository.getRepository().getUserList();
-        ListDataProvider<UserData> listDataProvider = new ListDataProvider<>(userDataList);
+        //List<UserData> userDataList = Repository.getRepository().getUserList();
+        //other way is to have this as local cache and update on AJAX calls - probably much better, but not a priority a priori
+        ListDataProvider<UserData> listDataProvider = new ListDataProvider<UserData>() {
+            @Override
+            protected List<UserData> getData() {
+                return Repository.getRepository().getUserList();
+            }
+        };
+
 
         DataView<UserData> userDataView = new DataView<UserData>("user_table_rows", listDataProvider) {
             @Override
