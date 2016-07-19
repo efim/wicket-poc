@@ -7,16 +7,25 @@
 <body>
     <wicket:panel>
         <h2>List of all added users:</h2>
-        <table>
-            <tr style="border: 2px solid black;">
-                <th>Name</th><th>Last name</th><th>Sex</th><th>Birth date</th><th>Temperature</th>
-                <th>Known allergies</th><th>Termination preference</th><!-- <th>Modify link</th> -->
-            </tr>
-            <tr wicket:id="user_table_rows" style="border: 1px solid black;">
-                <td wicket:id="user_data_row"  style="border: 1px solid grey;"></td>
-            </tr>
-        </table>
-        <div wicket:id="user_data_paging_navigator"></div>
+        <div style="display: flex;">
+            <div wicket:id="users_table_container" style="width: 90%;">
+                <table>
+                    <tr style="border: 2px solid black;">
+                        <th>Name</th><th>Last name</th><th>Sex</th><th>Birth date</th><th>Temperature</th>
+                        <th>Known allergies</th><th>Termination preference</th><!-- <th>Modify link</th> -->
+                    </tr>
+                    <tr wicket:id="user_table_rows" style="border: 1px solid black;">
+                        <td wicket:id="user_data_row"  style="border: 1px solid grey;"></td>
+                    </tr>
+                </table>
+                <div wicket:id="user_data_paging_navigator"></div>
+            </div>
+            <div style="flex-grow: 1;">
+                <div wicket:id="user_data_panel" ></div>
+                <a href="#" wicket:id="user_data_ajax_submit">Ajax Submit Form!</a>
+            </div>
+        </div>
+
     </wicket:panel>
 </body>
 </html>

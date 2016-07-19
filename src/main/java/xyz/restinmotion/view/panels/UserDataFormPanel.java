@@ -33,6 +33,7 @@ public abstract class UserDataFormPanel extends Panel {
     protected static final List<String> ALLERGY_VALUES = Arrays.asList(new String[] {"Nuts", "Flowers", "Babies", "Rainbows"});
     protected static final List<String> BRAIN_DAMAGE_PREFERENCE_VALUES =
             Arrays.asList(new String[] {"Keep alive", "Terminate", "Family decides"});
+
     protected UserData userData;
 
     protected static final String HEADER_ID = "header";
@@ -155,6 +156,10 @@ public abstract class UserDataFormPanel extends Panel {
         userDataForm.add(cbmcAllergies);
         userDataForm.add(tBirthDate);
         userDataForm.add(tTemperature);
+    }
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
     }
 
     protected abstract void onSubmit();

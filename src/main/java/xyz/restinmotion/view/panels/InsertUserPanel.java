@@ -2,7 +2,7 @@ package xyz.restinmotion.view.panels;
 
 import org.apache.wicket.markup.html.basic.Label;
 import xyz.restinmotion.data.Repository;
-import xyz.restinmotion.view.pages.MainPage;
+import xyz.restinmotion.data.UserData;
 
 /**
  * Created by efim on 28.06.16.
@@ -19,6 +19,7 @@ public class InsertUserPanel extends UserDataFormPanel {
     protected void onSubmit() {
         Repository.getRepository().addUserData(userData);
         notifyUserDataFormSubmission();
-        setResponsePage(MainPage.class);
+        userData = new UserData();
+        //setResponsePage(MainPage.class);
     }
 }
